@@ -1,0 +1,11 @@
+[package]
+name = "graphql-test"
+version = "0.1.0"
+authors = ["Klaus Purer <klaus.purer@protonmail.ch>"]
+edition = "2018"
+
+[dependencies]
+failure = "0.1"
+graphql_client = "0.8"
+serde = "^1.0"
+reqwest = "^0.9"
