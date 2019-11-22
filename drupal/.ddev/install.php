@@ -7,4 +7,5 @@ try {
 catch (\Exception $e) {}
 if (!$installed) {
   passthru('drush si -y');
+  passthru('drush en graphql_examples -y');
 }

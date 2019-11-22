@@ -156,4 +156,5 @@ timezone: ""
 
 hooks:
   post-start:
+    - exec: composer install -d /var/www/html
     - exec: drush scr /var/www/html/.ddev/install.php
