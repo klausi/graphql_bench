@@ -2,25 +2,32 @@ use graphql_client::*;
 
 #[derive(GraphQLQuery)]
 #[graphql(
-  schema_path = "schema.graphql",
-  query_path = "query.graphql",
-  response_derives = "Debug"
+    schema_path = "schema.graphql",
+    query_path = "query.graphql",
+    response_derives = "Debug"
 )]
 struct Article;
 
 fn main() -> Result<(), failure::Error> {
-  let q = Article::build_query(article::Variables { id: 23 });
+    let q = Article::build_query(article::Variables { id: 23 });
 
-  let client = reqwest::Client::new();
+    let client = reqwest::Client::new();
 
-  let mut res = client
-    .post("https://jobiqo8.ddev.site/graphql_example")
-    .json(&q)
-    .send()?;
+    let mut res = client
+        .post("https://jobiqo8.ddev.site/graphql_example")
+        .json(&q)
+        .send()?;
 
-  dbg!(&res);
-  let response_body: Response<article::ResponseData> = res.json()?;
-  dbg!(response_body);
+    dbg!(&res);
+    let response_body: Response<article::ResponseData> = res.json()?;
+    dbg!(response_body);
 
-  Ok(())
+    let text = client
+        .get("https://jobiqo8.ddev.site/node/23")
+        .send()?
+        .text()?;
+
+    dbg!(text);
+
+    Ok(())
 }
