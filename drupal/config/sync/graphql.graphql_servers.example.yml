@@ -1,0 +1,12 @@
+uuid: 13a814ea-eb7a-433c-8a92-8b37e33ff56c
+langcode: en
+status: true
+dependencies: {  }
+name: example
+label: Example
+schema: example
+schema_configuration: {  }
+endpoint: /graphql_example
+debug: false
+caching: true
+batching: true
