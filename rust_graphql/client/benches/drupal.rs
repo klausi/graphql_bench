@@ -53,5 +53,22 @@ fn jsonapi_drupal(b: &mut Bencher) {
     });
 }
 
-benchmark_group!(benches, graphql_drupal, html_drupal, jsonapi_drupal);
+fn graphql_rust(b: &mut Bencher) {
+    let q = Article::build_query(article::Variables { id: 1 });
+
+    let client = reqwest::Client::new();
+
+    b.iter(move || {
+        let mut res = client
+            .post("http://localhost:3000/graphql_example")
+            .json(&q)
+            .send()
+            .unwrap();
+
+        let response_body: Response<article::ResponseData> = res.json().unwrap();
+        assert_eq!(1, response_body.data.unwrap().article.unwrap().id);
+    });
+}
+
+benchmark_group!(benches, graphql_drupal, html_drupal, jsonapi_drupal, graphql_rust);
 benchmark_main!(benches);

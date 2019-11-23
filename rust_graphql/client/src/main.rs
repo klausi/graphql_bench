@@ -36,5 +36,14 @@ fn main() -> Result<(), failure::Error> {
 
     dbg!(json);
 
+    res = client
+        .post("http://localhost:3000/graphql_example")
+        .json(&q)
+        .send()?;
+
+    dbg!(&res);
+    let response_body: Response<article::ResponseData> = res.json()?;
+    dbg!(response_body);
+
     Ok(())
 }
