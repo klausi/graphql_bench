@@ -70,5 +70,11 @@ fn graphql_rust(b: &mut Bencher) {
     });
 }
 
-benchmark_group!(benches, graphql_drupal, html_drupal, jsonapi_drupal, graphql_rust);
+benchmark_group!(
+    benches,
+    graphql_drupal,
+    html_drupal,
+    jsonapi_drupal,
+    graphql_rust
+);
 benchmark_main!(benches);
