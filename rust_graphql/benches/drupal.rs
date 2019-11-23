@@ -40,5 +40,18 @@ fn html_drupal(b: &mut Bencher) {
     });
 }
 
-benchmark_group!(benches, graphql_drupal, html_drupal);
+fn jsonapi_drupal(b: &mut Bencher) {
+    let client = reqwest::Client::new();
+
+    b.iter(move || {
+        let json: serde_json::Value = client
+        .get("https://drupal-graphql.ddev.site/jsonapi/node/article/6997b22e-36ef-4d6e-9683-af23f4e7f137")
+        .send().unwrap()
+        .json().unwrap();
+
+        assert_eq!("6997b22e-36ef-4d6e-9683-af23f4e7f137", json["data"]["id"]);
+    });
+}
+
+benchmark_group!(benches, graphql_drupal, html_drupal, jsonapi_drupal);
 benchmark_main!(benches);

@@ -29,5 +29,12 @@ fn main() -> Result<(), failure::Error> {
 
     dbg!(text);
 
+    let json: serde_json::Value = client
+        .get("https://drupal-graphql.ddev.site/jsonapi/node/article/6997b22e-36ef-4d6e-9683-af23f4e7f137")
+        .send()?
+        .json()?;
+
+    dbg!(json);
+
     Ok(())
 }
