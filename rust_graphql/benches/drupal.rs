@@ -10,19 +10,19 @@ use graphql_client::*;
 struct Article;
 
 fn graphql_drupal(b: &mut Bencher) {
-    let q = Article::build_query(article::Variables { id: 23 });
+    let q = Article::build_query(article::Variables { id: 1 });
 
     let client = reqwest::Client::new();
 
     b.iter(move || {
         let mut res = client
-            .post("https://jobiqo8.ddev.site/graphql_example")
+            .post("https://drupal-graphql.ddev.site/graphql_example")
             .json(&q)
             .send()
             .unwrap();
 
         let response_body: Response<article::ResponseData> = res.json().unwrap();
-        assert_eq!(23, response_body.data.unwrap().article.unwrap().id);
+        assert_eq!(1, response_body.data.unwrap().article.unwrap().id);
     });
 }
 
@@ -31,7 +31,7 @@ fn html_drupal(b: &mut Bencher) {
 
     b.iter(move || {
         let mut res = client
-            .get("https://jobiqo8.ddev.site/node/23")
+            .get("https://drupal-graphql.ddev.site/node/1")
             .send()
             .unwrap();
 
