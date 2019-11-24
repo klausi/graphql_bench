@@ -1,0 +1,13 @@
+version: '3.6'
+services:
+  blackfire:
+    container_name: ddev-${DDEV_SITENAME}-blackfire
+    image: blackfire/blackfire
+    ports: ['8707']
+    environment:
+      BLACKFIRE_SERVER_ID: 'b725cf4f-00e0-4dd4-a47a-b7a5fa7a96fc'
+      BLACKFIRE_SERVER_TOKEN: 'ac3a6211fd32fdef96626f1c2afce4c39eda820081bc35caf91db399356fb55f'
+    hostname: ${DDEV_SITENAME}-blackfire
+  web:
+    links:
+      - blackfire:blackfire

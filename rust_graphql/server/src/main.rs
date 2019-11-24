@@ -60,7 +60,7 @@ impl Query {
 fn main() {
     let addr = ([127, 0, 0, 1], 3000).into();
 
-    let pool = mysql::Pool::new("mysql://db:db@127.0.0.1:32768/db").unwrap();
+    let pool = mysql::Pool::new("mysql://db:db@127.0.0.1:53306/db").unwrap();
 
     let context = Arc::new(Context { pool });
     let root_node = Arc::new(RootNode::new(Query, EmptyMutation::<Context>::new()));

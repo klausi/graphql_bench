@@ -159,3 +159,6 @@ hooks:
     - exec: composer install -d /var/www/html
     - exec: drush scr /var/www/html/.ddev/install.php
     - exec: drush scr /var/www/html/.ddev/create_node.php
+
+# Fixed port so that Rust can connect to MySQL as well.
+host_db_port: "53306"
